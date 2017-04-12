@@ -276,10 +276,10 @@ public class MainActivity extends AppCompatActivity {
                     Vision vision = builder.build();
 
                     List<Feature> featureList = new ArrayList<>();
-//                    Feature labelDetection = new Feature();
-//                    labelDetection.setType("LABEL_DETECTION");
-//                    labelDetection.setMaxResults(10);
-//                    featureList.add(labelDetection);
+                    Feature labelDetection = new Feature();
+                    labelDetection.setType("LABEL_DETECTION");
+                    labelDetection.setMaxResults(10);
+                    featureList.add(labelDetection);
 
                     Feature textDetection = new Feature();
                     textDetection.setType("TEXT_DETECTION");
@@ -350,6 +350,7 @@ public class MainActivity extends AppCompatActivity {
     private String convertResponseToString(BatchAnnotateImagesResponse response) {
         String message = "I found these things:\n\n";
 
+        message += "Labels:\n";
         List<EntityAnnotation> labels = response.getResponses().get(0).getLabelAnnotations();
         if (labels != null) {
             for (EntityAnnotation label : labels) {
@@ -357,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
                 message += "\n";
             }
         } else {
-            message += "nothing";
+            message += "nothing\n";
         }
 
         message += "Texts:\n";
@@ -373,7 +374,18 @@ public class MainActivity extends AppCompatActivity {
             message += "nothing\n";
         }
 
-
+        message += "Landmarks:\n";
+        List<EntityAnnotation> landmarks = response.getResponses().get(0)
+                .getLandmarkAnnotations();
+        if (landmarks != null) {
+            for (EntityAnnotation landmark : landmarks) {
+                message += String.format(Locale.getDefault(), "%.3f: %s",
+                        landmark.getScore(), landmark.getDescription());
+                message += "\n";
+            }
+        } else {
+            message += "nothing\n";
+        }
         return message;
     }
 }
