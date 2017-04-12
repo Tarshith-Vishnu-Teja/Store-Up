@@ -15,7 +15,7 @@
         <activity
             android:screenOrientation="portrait"
             android:name="com.StoreUp.MainActivity"
-            android:label="com.StoreUp"
+            android:label="StoreUp"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
