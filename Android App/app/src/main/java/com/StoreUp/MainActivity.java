@@ -228,7 +228,14 @@ public class MainActivity extends AppCompatActivity {
 
                     Vision vision = builder.build();
 
+
                     List<Feature> featureList = new ArrayList<>();
+
+                    Feature logoDetection = new Feature();
+                    logoDetection.setType("LOGO_DETECTION");
+                    logoDetection.setMaxResults(10);
+                    featureList.add(logoDetection);
+
                     Feature labelDetection = new Feature();
                     labelDetection.setType("LABEL_DETECTION");
                     labelDetection.setMaxResults(10);
@@ -302,6 +309,17 @@ public class MainActivity extends AppCompatActivity {
 
     private String convertResponseToString(BatchAnnotateImagesResponse response) {
         String message = "I found these things:\n\n";
+
+        message+= "Store Name:\n";
+        List<EntityAnnotation> logos = response.getResponses().get(0).getLogoAnnotations();
+        if (logos != null) {
+            for (EntityAnnotation logo : logos) {
+                message += String.format(Locale.US, "%s", logo.getDescription());
+                message += "\n";
+            }
+        } else {
+            message += "nothing\n";
+        }
 
         message += "Labels:\n";
         List<EntityAnnotation> labels = response.getResponses().get(0).getLabelAnnotations();
