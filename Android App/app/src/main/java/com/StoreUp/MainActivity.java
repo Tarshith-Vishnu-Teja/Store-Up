@@ -16,6 +16,8 @@
 
 package com.StoreUp;
 
+import java.util.*;
+
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -269,6 +271,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(LOG_TAG, "sending request");
 
                     BatchAnnotateImagesResponse response = annotateRequest.execute();
+
                     return convertResponseToString(response);
 
                 } catch (GoogleJsonResponseException e) {
@@ -331,16 +334,30 @@ public class MainActivity extends AppCompatActivity {
         } else {
             message += "nothing\n";
         }
+        Set<String> stateName =new HashSet<String>();
+        stateName.add("FL");
 
+        StringBuilder word = new StringBuilder();
         message += "Texts:\n";
         List<EntityAnnotation> texts = response.getResponses().get(0)
                 .getTextAnnotations();
+
+        String zipcode=null;
         if (texts != null) {
             for (EntityAnnotation text : texts) {
                 message += String.format(Locale.getDefault(), "%s: %s",
                         text.getLocale(), text.getDescription());
+
                 message += "\n";
             }
+            String[] str = message.split(" ");
+            for(int i=0;i<str.length;i++){
+                if(stateName.contains(str[i])) {
+                    zipcode = str[i + 1];
+                    break;
+                }
+            }
+            message += "\n Zipcode:"+zipcode+"\n";
         } else {
             message += "nothing\n";
         }
