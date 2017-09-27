@@ -33,7 +33,7 @@ public class LoginActivity extends ActionBarActivity {
     private EditText et_email;
     private EditText et_password;
     private Button btn_login;
-    private String url = "http://10.0.2.2:3000/login";
+    private String url = "http://10.0.2.2:8080/login";
 
     private static String KEY_SUCCESS = "success";
     private static String KEY_USERID  = "userid";
@@ -106,7 +106,7 @@ public class LoginActivity extends ActionBarActivity {
                             Map<String, String> params = new HashMap<String, String>();
                             params.put("tag", "login");
                             params.put("email", et_email.getText().toString());
-                            params.put("password", Utils.md5(et_password.getText().toString()));
+                            params.put("password", et_password.getText().toString());
                             return params;
                         }
 

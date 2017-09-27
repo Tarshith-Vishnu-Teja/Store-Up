@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 var port = process.env.PORT || 8080;
 
 // REGISTER ROUTES
-app.use('/', require('./routes').router);
+app.use('/', require('./routes/routes').router);
 
 // START THE SERVER
 app.listen(port);

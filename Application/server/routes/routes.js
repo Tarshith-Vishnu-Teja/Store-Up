@@ -20,7 +20,7 @@ router.get('/andro', function(req, res) {
 });
 
 // LOGIN Route
-router.route('/andro/login').post(function(req, res) {
+router.route('/login').post(function(req, res) {
     var tag      = req.body.tag,
         email    = req.body.email,
         password = req.body.password;
