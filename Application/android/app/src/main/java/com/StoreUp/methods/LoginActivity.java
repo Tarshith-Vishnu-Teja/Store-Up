@@ -71,6 +71,7 @@ public class LoginActivity extends ActionBarActivity {
                                         if (response.getString(KEY_SUCCESS) != null) {
                                             int success = Integer.parseInt(response.getString(KEY_SUCCESS));
                                             if (success == 1) {
+                                                //Intent home = new Intent(LoginActivity.this,LoginActivity.class);
                                                 Intent home = new Intent(LoginActivity.this, HomeActivity.class);
                                                 home.putExtra(KEY_USERID, Integer.parseInt(response.getString(KEY_USERID)));
                                                 startActivity(home);
