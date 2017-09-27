@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `storeup`.`user_details` (
   `city` VARCHAR(45) NOT NULL,
   `state` VARCHAR(45) NOT NULL,
   `zipcode` VARCHAR(45) NOT NULL,
-  `phone_number` INT(11) NOT NULL,
+  `phone_number` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`, `email`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB

@@ -5,8 +5,8 @@ module.exports = function () {
         db = mysql.createConnection({
             host:       "localhost",
             user:       "root",
-            password:   "",
-            database:   "dbname"
+            password:   "1234",
+            database:   "storeup"
         });
     };
     return db;
