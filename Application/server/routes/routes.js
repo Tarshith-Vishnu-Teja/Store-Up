@@ -14,10 +14,6 @@ router.use(function(req, res, next) {
     next(); // visit next routes
 });
 
-//ANDROID General routes
-router.get('/andro', function(req, res) {
-    res.json({ message: 'Login/RegisterSystem!' });   
-});
 
 // LOGIN Route
 router.route('/login').post(function(req, res) {
