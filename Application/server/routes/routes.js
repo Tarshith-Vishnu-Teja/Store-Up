@@ -48,7 +48,12 @@ router.route('/register').post(function(req, res) {
     var tag      = req.body.tag,
         username = req.body.username,
         email    = req.body.email,
-        password = req.body.password;
+        password = req.body.password,
+        street = req.body.street,
+        city = req.body.city,
+        state = req.body.state,
+        zipcode = req.body.zipcode,
+        phone = req.body.phone;
 
     req.checkBody('email', 'not a valid email.').isEmail();
     req.checkBody('username', '2-32 character').len(2, 32);
