@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">storeup</string>
+    <string name="invalid_login">Invalid email or password..</string>
+    <string name="email_exists">Your e-mail is already taken. Please enter another e-mail.</string>
+    <string name="username_exists">Your username is already taken. Please enter another username.</string>
+    <string name="invalid_post">Something went wrong.Please try again..</string>
+    <string name="registered">You have been registered succesfuly.</string>
+</resources>
