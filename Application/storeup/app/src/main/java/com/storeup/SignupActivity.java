@@ -74,6 +74,8 @@ public class SignupActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Your password must contain 8-32 character.", Toast.LENGTH_LONG).show();
                 }else if(TextUtils.isEmpty(et_username.getText()) || et_username.getText().length() < 2 || et_password.getText().length() > 32) {
                     Toast.makeText(getApplicationContext(), "Your username must contain 2-32 character.", Toast.LENGTH_LONG).show();
+                }else if(TextUtils.isEmpty(et_phone.getText()) || et_phone.getText().length() < 10 || et_password.getText().length() > 10){
+                    Toast.makeText(getApplicationContext(), "Enter a valid phone number", Toast.LENGTH_LONG).show();
                 }
                 else{
                     CustomJSONObjectRequest rq = new CustomJSONObjectRequest(Request.Method.POST, url, null,
@@ -119,7 +121,7 @@ public class SignupActivity extends AppCompatActivity {
                             Map<String, String> params = new HashMap<String, String>();
                             params.put("tag", "register");
                             params.put("email", et_email.getText().toString());
-                            params.put("username", et_email.getText().toString());
+                            params.put("username", et_username.getText().toString());
                             //params.put("password", Utils.md5(et_password.getText().toString()));
                             params.put("password", et_password.getText().toString());
                             params.put("street", et_street.getText().toString());

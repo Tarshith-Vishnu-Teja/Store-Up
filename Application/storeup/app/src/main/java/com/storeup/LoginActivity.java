@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private String url = "http://10.0.2.2:8080/login";
 
     private static String KEY_SUCCESS = "success";
-    private static String KEY_USERID  = "userid";
+    private static String KEY_USERID  = "username";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +70,8 @@ public class LoginActivity extends AppCompatActivity {
                                             int success = Integer.parseInt(response.getString(KEY_SUCCESS));
                                             if (success == 1) {
                                                 //Intent home = new Intent(LoginActivity.this,LoginActivity.class);
-                                                Intent home = new Intent(LoginActivity.this, LoginActivity.class);
-                                                home.putExtra(KEY_USERID, Integer.parseInt(response.getString(KEY_USERID)));
+                                                Intent home = new Intent(LoginActivity.this, MainActivity.class);
+                                                home.putExtra(KEY_USERID, response.getString(KEY_USERID));
                                                 startActivity(home);
                                                 finish();
                                             } else if (success == 0) {
