@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_email;
     private EditText et_password;
     private Button btn_login;
-    private String url = "http://10.0.2.2:8080/login";
+    private String url = "http://10.0.2.2:3000/loginRegister/login";
 
     private static String KEY_SUCCESS = "success";
     private static String KEY_USERID  = "username";

@@ -38,7 +38,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
 
-    private String url = "http://10.0.2.2:8080/register";
+    private String url = "http://10.0.2.2:3000/loginRegister/register";
     private static String KEY_SUCCESS = "success";
     private static String KEY_USERID  = "userid";
     private Thread thread;
