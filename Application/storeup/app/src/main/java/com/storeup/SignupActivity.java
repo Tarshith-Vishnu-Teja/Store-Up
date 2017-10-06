@@ -69,14 +69,14 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (TextUtils.isEmpty(et_email.getText()) || !android.util.Patterns.EMAIL_ADDRESS.matcher(et_email.getText()).matches()) {
-                    Toast.makeText(getApplicationContext(), "Please enter an invalid email", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Please enter an valid email", Toast.LENGTH_LONG).show();
                 }else if(TextUtils.isEmpty(et_password.getText()) || et_password.getText().length() < 8 || et_password.getText().length() > 32) {
                     Toast.makeText(getApplicationContext(), "Your password must contain 8-32 character.", Toast.LENGTH_LONG).show();
                 }else if(TextUtils.isEmpty(et_username.getText()) || et_username.getText().length() < 2 || et_password.getText().length() > 32) {
                     Toast.makeText(getApplicationContext(), "Your username must contain 2-32 character.", Toast.LENGTH_LONG).show();
-                }else if(TextUtils.isEmpty(et_phone.getText()) || et_phone.getText().length() < 10 || et_password.getText().length() > 10){
+                }/*else if(TextUtils.isEmpty(et_phone.getText()) || et_phone.getText().length() < 10 || et_password.getText().length() > 10){
                     Toast.makeText(getApplicationContext(), "Enter a valid phone number", Toast.LENGTH_LONG).show();
-                }
+                }*/
                 else{
                     CustomJSONObjectRequest rq = new CustomJSONObjectRequest(Request.Method.POST, url, null,
                             new Response.Listener<JSONObject>() {

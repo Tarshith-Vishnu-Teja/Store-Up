@@ -14,6 +14,21 @@ router.use(function(req, res, next) {
     next(); // visit next routes
 });
 
+router.route('/image').post(function(req,res){
+    comsole.log("reached fdfads1111");
+    var image = req.body.HINH;
+    var buf = Buffer.from(image, 'base64');
+    comsole.log("reached fdfads");
+    require("fs").writeFile("out.png", buf, 'base64',
+        function(err, data) {
+            if (err) {
+                //console.log('err', err);
+            }
+            //console.log('success');
+
+        });
+})
+
 
 // LOGIN Route
 router.route('/login').post(function(req, res) {
