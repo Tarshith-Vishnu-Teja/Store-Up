@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } //else if (id == R.id.nav_send) {     COMMENTED BECAUSE ITEM-SEND WAS COMMENTED IN ACTIVITY_MAIN_DRAWER
 
-        }
+       // }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
