@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "74860872923",
+    "firebase_url": "https://storeup-7952a.firebaseio.com",
+    "project_id": "storeup-7952a",
+    "storage_bucket": "storeup-7952a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74860872923:android:d80536ab121ed303",
+        "android_client_info": {
+          "package_name": "com.storeup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74860872923-c65g5a8vba80koapgqoff9itqcgdb663.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storeup",
+            "certificate_hash": "55fb7d317df3e5230481ce51d8e7687ae8932067"
+          }
+        },
+        {
+          "client_id": "74860872923-4gn2jiflcs6m440sjb69j48942kbuo7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxdzimQwHWrsPgu8Ugwi4h3upXIA8RcOU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74860872923-4gn2jiflcs6m440sjb69j48942kbuo7a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
