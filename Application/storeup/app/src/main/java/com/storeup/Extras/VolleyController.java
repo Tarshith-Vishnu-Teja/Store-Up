@@ -38,12 +38,12 @@ public class VolleyController {
         getRequestQueue().add(req);
     }
 
-    public ImageLoader getImageLoader() {
+    /*public ImageLoader getImageLoader() {
         getRequestQueue();
         if (mImageLoader == null) {
             mImageLoader = new ImageLoader(getRequestQueue(), new LruBitmapCache());
         }
         return this.mImageLoader;
-    }
+    }*/
 
 }
