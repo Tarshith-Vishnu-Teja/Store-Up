@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
+
         //attaching listener
         buttonUpload.setOnClickListener(this);
 
@@ -187,8 +188,8 @@ public class MainActivity extends AppCompatActivity
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
-
-            StorageReference uploadRef = storageReference.child("images/costco.jpg");
+            String[] arr = filePath.toString().split("/");
+            StorageReference uploadRef = storageReference.child("images/"+arr[arr.length-1]);
             uploadRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
