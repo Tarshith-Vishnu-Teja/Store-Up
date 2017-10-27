@@ -16,6 +16,10 @@
     "formidable" : "1.0.15",
     "fs-extra" : "0.12.0",
     "mongodb": "2.2.19",
+    "gcloud": "^0.37.2",
+    "google-cloud": "^0.57.0",
+    "fs": "^0.0.1-security",
+    "@google-cloud/vision": "^0.12.0",
     "mysql": "2.2.0"
   }
 }
