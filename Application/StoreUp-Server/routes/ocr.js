@@ -76,10 +76,27 @@ router.post('/getImageOcr',function (res,req,next) {
 
      gcloud.batchAnnotateImages({requests: requests}).then(function(results) {
          var text = results[0].responses[0].fullTextAnnotation.text;
-         //var logo = results[0].responses[0].logoAnnotations[0].description;
+         //console.log("Text is: \n"+text);
+         var logo="";
+         if(typeof (results[0].responses[0].logoAnnotations[0])=="undefined"){
+             var count=0;
+             for(var i=0;i<text.length;i++){
+                 if(count>=1){
+                     break;
+                 }
+                 if(count==0){
+                     logo+=text.charAt(i);
+                 }
+                 if(text.charAt(i)=="\n")
+                    count++;
+             }
+         }else{
+             logo = results[0].responses[0].logoAnnotations[0].description;
+         }
+
          var address="";
-         console.log("Text is: \n"+text);
-         //console.log("Logo is: \n"+logo);
+         //console.log("Text is: \n"+text);
+         console.log("Logo is: \n"+logo);
          if(logo=="Target" || logo=="Target Corporation"){
              var count=0;
              for(var i=0;i<text.length;i++){
@@ -120,20 +137,22 @@ router.post('/getImageOcr',function (res,req,next) {
                      count++;
                  }
              }
+         }else if  (logo == "SAFEWAY"){
+             
          }
 
          console.log("Text is: \n"+text);
-         /*console.log("Store Name is :"+logo+" and the address is:"+address);
+         console.log("Store Name is :"+logo+" and the address is:"+address);
          var addr = logo+" "+address;
          console.log(addr);
 
          googleMapsClient.geocode({
-             address: "Grocery Outlet #231 Downtown grocery out"
+             address: addr
          },function (err,response) {
              if(!err){
                  console.log(response.json.results[0].address_components);
              }
-         });*/
+         });
          /*console.log("Logo is: \n"+logo);*/
          //console.log("Text is: \n"+text);
 
