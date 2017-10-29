@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,21 +28,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.storeup.Extras.CustomJSONObjectRequest;
+import com.storeup.Extras.VolleyController;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+    private String url = "http://10.0.2.2:3000/ocr/getImageOcr";
+    private static String KEY_SUCCESS = "success";
+    private static String KEY_USERID  = "userid";
     TextView test;
     String s;
     private String userChoosenTask;
@@ -188,8 +204,9 @@ public class MainActivity extends AppCompatActivity
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
-            String[] arr = filePath.toString().split("/");
+            final String[] arr = filePath.toString().split("/");
             StorageReference uploadRef = storageReference.child("images/"+arr[arr.length-1]);
+            Toast.makeText(getApplicationContext(), "Storage Uri: "+arr[arr.length-1], Toast.LENGTH_LONG).show();
             uploadRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -200,6 +217,68 @@ public class MainActivity extends AppCompatActivity
                             //and displaying a success toast
                             @SuppressWarnings("VisibleForTests")Uri downloadUri = taskSnapshot.getDownloadUrl();
                             Toast.makeText(getApplicationContext(), "File Uploaded "+downloadUri.toString(), Toast.LENGTH_LONG).show();
+
+
+
+                            CustomJSONObjectRequest rq = new CustomJSONObjectRequest(Request.Method.POST, url, null,
+                                    new Response.Listener<JSONObject>() {
+                                        @Override
+                                        public void onResponse(JSONObject response) {
+                                            try {
+                                                if (response.getString(KEY_SUCCESS) != null) {
+                                                    int success = Integer.parseInt(response.getString(KEY_SUCCESS));
+                                                    if (success == 1) {
+                                                        Toast.makeText(getApplicationContext(), R.string.registered, Toast.LENGTH_LONG).show();
+
+                                                    } else if (success == 0) {
+                                                        Toast.makeText(getApplicationContext(), R.string.email_exists, Toast.LENGTH_LONG).show();
+                                                    }else if (success == 2) {
+                                                        Toast.makeText(getApplicationContext(), R.string.username_exists, Toast.LENGTH_LONG).show();
+                                                    }else {
+                                                        Toast.makeText(getApplicationContext(), R.string.invalid_post, Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }, new Response.ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.d("Response Error", error.toString());
+                                    Toast.makeText(getApplicationContext(), R.string.invalid_post, Toast.LENGTH_LONG).show();
+                                }
+                            }) {
+
+                                @Override
+                                public Map<String, String> getHeaders() throws AuthFailureError {
+                                    HashMap<String, String> headers = new HashMap<String, String>();
+                                    headers.put("Content-Type", "application/x-www-form-urlencoded");
+                                    headers.put("User-agent","My agent");
+                                    return headers;
+                                }
+
+                                @Override
+                                protected Map<String, String> getParams() {
+                                    Map<String, String> params = new HashMap<String, String>();
+                                    params.put("tag", "register");
+                                    params.put("email", "sdkjflslkdfksalj");
+                                    params.put("StorageReference",arr[arr.length-1]);
+                                    return params;
+                                }
+
+                            };
+                            rq.setRetryPolicy(new DefaultRetryPolicy(
+                                    0,
+                                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+                            VolleyController.getInstance(getApplicationContext()).addToRequestQueue(rq);
+
+
+
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
