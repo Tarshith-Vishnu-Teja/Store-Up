@@ -4,11 +4,13 @@
     <string name="email_exists">Your e-mail is already taken. Please enter another e-mail.</string>
     <string name="username_exists">Your username is already taken. Please enter another username.</string>
     <string name="invalid_post">Something went wrong.Please try again..</string>
-    <string name="registered">You have been registered succesfuly.</string>
+    <string name="registered">You have been registered successfully.</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="descImage">You image will be displayed here</string>
+    <string name="upload">Upload</string>
 </resources>
