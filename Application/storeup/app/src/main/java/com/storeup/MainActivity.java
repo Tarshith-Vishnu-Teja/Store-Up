@@ -52,6 +52,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -61,12 +62,12 @@ public class MainActivity extends AppCompatActivity
     TextView test;
     String s;
     private String userChoosenTask;
-    private int REQUEST_CAMERA = 0;
+    private int REQUEST_CAMERA = 1;
     //
     private ImageView imageView;
 
     private Button buttonUpload;
-    private int PICK_IMAGE_REQUEST = 1;
+    private int PICK_IMAGE_REQUEST = 2;
     private Uri filePath;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     //
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Add Receipt!");
+        builder.setTitle("Upload your Receipt!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
@@ -155,11 +156,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if ( resultCode == RESULT_OK && data != null && data.getData() != null) {
-            if (requestCode == PICK_IMAGE_REQUEST)
+        if ( resultCode == RESULT_OK ) {  /*&&&& data != null && data.getData() != null*/
+            if (requestCode == PICK_IMAGE_REQUEST){
                 onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
+            } else if (requestCode == REQUEST_CAMERA) {
                 onCaptureImageResult(data);
+            }
         }
     }
 
@@ -178,11 +180,20 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void onCaptureImageResult(Intent data) {
+        Random random = new Random();
+        int key =random.nextInt(1000);
+        File photo = new File(String.valueOf(Environment.getExternalStorageDirectory()));
+        filePath = Uri.fromFile(photo);
+        data.putExtra(MediaStore.EXTRA_OUTPUT, filePath);
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        /*try {
+            thumbnail = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
+        File destination = new File(Environment.getExternalStorageDirectory(),System.currentTimeMillis() + ".jpg");
         FileOutputStream fo;
         try {
             destination.createNewFile();
@@ -215,7 +226,7 @@ public class MainActivity extends AppCompatActivity
                             progressDialog.dismiss();
 
                             //and displaying a success toast
-                            @SuppressWarnings("VisibleForTests")Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            @SuppressWarnings("VisibleForTests")StorageReference downloadUri = taskSnapshot.getStorage();
                             Toast.makeText(getApplicationContext(), "File Uploaded "+downloadUri.toString(), Toast.LENGTH_LONG).show();
 
 
