@@ -1,9 +1,12 @@
 package com.storeup;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +14,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity
     String s;
     private String userChoosenTask;
     private int REQUEST_CAMERA = 1;
+    private int UPLOAD_FLAG = 0;
     //
     private ImageView imageView;
 
@@ -71,6 +77,7 @@ public class MainActivity extends AppCompatActivity
     private int PICK_IMAGE_REQUEST = 2;
     private Uri filePath;
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private StorageReference uploadRef;
     //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,9 +134,11 @@ public class MainActivity extends AppCompatActivity
             public void onClick(DialogInterface dialog, int item) {
                 if (items[item].equals("Take Photo")) {
                     userChoosenTask="Take Photo";
+                    UPLOAD_FLAG = 0;
                     cameraIntent();
                 } else if (items[item].equals("Choose from Library")) {
                     userChoosenTask="Choose from Library";
+                    UPLOAD_FLAG = 1;
                     showFileChooser();
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
@@ -181,20 +190,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void onCaptureImageResult(Intent data) {
-        Random random = new Random();
-        int key =random.nextInt(1000);
-        File photo = new File(String.valueOf(Environment.getExternalStorageDirectory()));
-        filePath = Uri.fromFile(photo);
-        data.putExtra(MediaStore.EXTRA_OUTPUT, filePath);
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        /*try {
-            thumbnail = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File destination = new File(Environment.getExternalStorageDirectory(),System.currentTimeMillis() + ".jpg");
+        File destination = new File(Environment.getExternalStorageDirectory(),System.currentTimeMillis() + ".jpeg");
         FileOutputStream fo;
         try {
             destination.createNewFile();
@@ -206,6 +206,8 @@ public class MainActivity extends AppCompatActivity
         } catch (IOException e) {
             e.printStackTrace();
         }
+        filePath = Uri.fromFile(destination);
+        data.putExtra(MediaStore.EXTRA_OUTPUT, filePath);
         imageView.setImageBitmap(thumbnail);
     }
 
@@ -217,8 +219,15 @@ public class MainActivity extends AppCompatActivity
             progressDialog.setTitle("Uploading");
             progressDialog.show();
             final String[] arr = filePath.toString().split("/");
-            StorageReference uploadRef = storageReference.child("images/"+arr[arr.length-1]);
-            Toast.makeText(getApplicationContext(), "Storage Uri: "+arr[arr.length-1], Toast.LENGTH_LONG).show();
+            if(UPLOAD_FLAG == 1) {
+                uploadRef = storageReference.child("images/" + arr[arr.length - 1]);
+                Toast.makeText(getApplicationContext(), "Storage Uri: " + arr[arr.length - 1], Toast.LENGTH_LONG).show();
+            } else if (UPLOAD_FLAG == 0) {
+                Random random = new Random();
+                int key =random.nextInt(1000);
+                uploadRef = storageReference.child("pictures/" + "pic" + key + ".jpg");
+                Toast.makeText(getApplicationContext(), "Storage Uri: " + "pic" + key, Toast.LENGTH_LONG).show();
+            }
             uploadRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
