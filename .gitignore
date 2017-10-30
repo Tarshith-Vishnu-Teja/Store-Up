@@ -1,0 +1,11 @@
+Application/StoreUp-Server/node_modules/
+Application/StoreUp-Server/.idea/
+Application/storeup/build/
+Application/storeup/app/build/
+Application/storeup/.idea/
+Application/storeup/.gradle/
+.idea/
+Application/storeup/storeup.iml
+Application/storeup/local.properties
+Application/storeup/app/app.iml
+Application/storeup/gradle/wrapper/gradle-wrapper.properties
