@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_password;
     private Button btn_login;
     private String url = "http://10.0.2.2:3000/loginRegister/login";
+    AppSessionManager appSessionManager;
 
     private static String KEY_SUCCESS = "success";
     private static String KEY_USERID  = "username";
@@ -69,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
                                         if (response.getString(KEY_SUCCESS) != null) {
                                             int success = Integer.parseInt(response.getString(KEY_SUCCESS));
                                             if (success == 1) {
+                                                appSessionManager=new AppSessionManager(getApplicationContext());
+                                                appSessionManager.createLoginSession(et_email.getText().toString());
                                                 //Intent home = new Intent(LoginActivity.this,LoginActivity.class);
                                                 Intent home = new Intent(LoginActivity.this, MainActivity.class);
                                                 home.putExtra(KEY_USERID, response.getString(KEY_USERID));

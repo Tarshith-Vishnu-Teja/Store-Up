@@ -79,11 +79,14 @@ public class MainActivity extends AppCompatActivity
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private StorageReference uploadRef;
     //
+    AppSessionManager appSessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        appSessionManager=new AppSessionManager(getApplicationContext());
+        appSessionManager.checkLoginStatus();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
