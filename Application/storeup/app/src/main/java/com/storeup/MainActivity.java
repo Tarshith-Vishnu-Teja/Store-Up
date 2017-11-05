@@ -105,8 +105,10 @@ public class MainActivity extends AppCompatActivity
                 selectImage();
             }
         });
-        s= getIntent().getStringExtra("username");
-        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+
+        s = appSessionManager.getUserName();
+        //s= getIntent().getStringExtra("username");
+        Toast.makeText(getApplicationContext(),"Welcome "+s, Toast.LENGTH_LONG).show();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

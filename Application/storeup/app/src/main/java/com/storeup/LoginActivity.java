@@ -74,7 +74,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 appSessionManager.createLoginSession(et_email.getText().toString());
                                                 //Intent home = new Intent(LoginActivity.this,LoginActivity.class);
                                                 Intent home = new Intent(LoginActivity.this, MainActivity.class);
-                                                home.putExtra(KEY_USERID, response.getString(KEY_USERID));
+                                                appSessionManager.createUserSession(response.getString(KEY_USERID).toString());
+                                                //home.putExtra(KEY_USERID, response.getString(KEY_USERID));
                                                 startActivity(home);
                                                 finish();
                                             } else if (success == 0) {
