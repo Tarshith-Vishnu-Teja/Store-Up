@@ -3,6 +3,7 @@ package com.storeup;
 import android.*;
 import android.Manifest;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -367,28 +369,41 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private void displaySelectedNavScreen(int id) {
+        Fragment fragment = null;
+        switch (id) {
+            case R.id.user_profile:
+                fragment = new UserProfile();
+                break;
+            case R.id.user_receipts:
+                fragment = new UserReceipts();
+                break;
+            case R.id.user_coupons:
+                fragment = new UserCoupons();
+                break;
+            case R.id.faqs:
+                fragment = new Faqs();
+                break;
+        }
+        if(fragment != null) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+            ft.replace(R.id.content_main, fragment);
+            ft.commit();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        displaySelectedNavScreen(id);
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } //else if (id == R.id.nav_send) {     COMMENTED BECAUSE ITEM-SEND WAS COMMENTED IN ACTIVITY_MAIN_DRAWER
-
-       // }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }
