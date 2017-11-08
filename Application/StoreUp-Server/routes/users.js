@@ -5,8 +5,7 @@ var db = require('./connectdb')();
 /* GET users listing. */
 router.get('/userDetails', function(req, res, next) {
 
-    var email = req.body.email;
-
+    var email = req.query.email;
     console.log(email);
 
     db.query('select * from user_details where email = ?', [email], function(err, rows, fields) {

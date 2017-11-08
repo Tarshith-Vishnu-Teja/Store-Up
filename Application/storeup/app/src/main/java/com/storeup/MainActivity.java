@@ -40,6 +40,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -374,6 +375,7 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.user_profile:
                 fragment = new UserProfile();
+                getUserDetails();
                 break;
             case R.id.user_receipts:
                 fragment = new UserReceipts();
@@ -394,6 +396,53 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    private void getUserDetails() {
+        String email = appSessionManager.getKeyEmail();
+        final String URL = "http://10.0.2.2:3000/users/userDetails" + "?email=" + email;
+
+        // pass second argument as "null" for GET requests
+
+        CustomJSONObjectRequest req = new CustomJSONObjectRequest(URL, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            VolleyLog.v("Response:%n %s", response.toString(4));
+                            if (response.getString(KEY_SUCCESS) != null) {
+                                int success = Integer.parseInt(response.getString(KEY_SUCCESS));
+                                if (success == 1) {
+                                    Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+
+                                } else if (success == 0) {
+                                    Toast.makeText(getApplicationContext(), R.string.email_exists, Toast.LENGTH_LONG).show();
+                                }else if (success == 2) {
+                                    Toast.makeText(getApplicationContext(), R.string.username_exists, Toast.LENGTH_LONG).show();
+                                }else {
+                                    Toast.makeText(getApplicationContext(), R.string.invalid_post, Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Response Error", error.toString());
+                Toast.makeText(getApplicationContext(), R.string.invalid_post, Toast.LENGTH_LONG).show();
+            }
+        });
+        req.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleyController.getInstance(getApplicationContext()).addToRequestQueue(req);
+
+        Toast.makeText(getApplicationContext(),URL, Toast.LENGTH_LONG).show();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
