@@ -36,6 +36,10 @@ public class AppSessionManager {
         return sharedPref.getString(USER_NAME,null);
     }
 
+    public String getKeyEmail() {
+        return sharedPref.getString(KEY_EMAIL,null);
+    }
+
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
         user.put(KEY_EMAIL, sharedPref.getString(KEY_EMAIL, null));
