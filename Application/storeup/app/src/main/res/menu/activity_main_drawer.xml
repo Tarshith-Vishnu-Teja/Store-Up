@@ -17,6 +17,10 @@
             android:id="@+id/user_coupons"
             android:icon="@drawable/ic_menu_gallery"
             android:title="My Coupons" />
+        <item
+            android:id="@+id/scan_receipts"
+            android:icon="@drawable/ic_scan_receipt"
+            android:title="Scan Receipt" />
     </group>
 
     <item android:title="Communicate">
