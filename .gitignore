@@ -7,3 +7,11 @@ Application/storeup/local.properties
 Application/storeup/storeup.iml
 Application/storeup/app/app.iml
 Application/StoreUp-Server/.idea/
+Application/storeup/app/src/main/AndroidManifest_REMOTE_6772.xml
+Application/storeup/app/src/main/AndroidManifest_REMOTE_11500.xml
+Application/storeup/app/src/main/AndroidManifest_LOCAL_6772.xml
+Application/storeup/app/src/main/AndroidManifest_LOCAL_11500.xml
+Application/storeup/app/src/main/AndroidManifest_BASE_6772.xml
+Application/storeup/app/src/main/AndroidManifest_BASE_11500.xml
+Application/storeup/app/src/main/AndroidManifest_BACKUP_6772.xml
+Application/storeup/app/src/main/AndroidManifest_BACKUP_11500.xml
