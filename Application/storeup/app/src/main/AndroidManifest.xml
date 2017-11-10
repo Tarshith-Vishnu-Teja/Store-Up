@@ -13,8 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
-        </activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
         <activity
             android:name=".MainActivity"
@@ -26,6 +25,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".nav_userProfile"
+            android:label="@string/title_activity_nav_user_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".nav_userCoupons"
+            android:label="@string/title_activity_nav_user_coupons"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".nav_userReceipts"
+            android:label="@string/title_activity_nav_user_receipts"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".nav_faqs"
+            android:label="@string/title_activity_nav_faqs"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

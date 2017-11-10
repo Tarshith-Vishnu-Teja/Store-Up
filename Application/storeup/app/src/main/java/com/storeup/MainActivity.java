@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
     private String userChoosenTask;
     private int REQUEST_CAMERA = 1;
     private int UPLOAD_FLAG = 0;
-    //
+
     private ImageView imageView;
 
     private Button buttonUpload;
@@ -83,6 +83,11 @@ public class MainActivity extends AppCompatActivity
     private StorageReference uploadRef;
     //
     AppSessionManager appSessionManager;
+    DrawerLayout drawer;
+    NavigationView navigationView;
+    Toolbar toolbar = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -374,25 +379,33 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         switch (id) {
             case R.id.user_profile:
-                fragment = new UserProfile();
+                Intent userProfile = new Intent(MainActivity.this, nav_userProfile.class);
+                //fragment = new UserProfile();
                 getUserDetails();
+                startActivity(userProfile);
                 break;
             case R.id.user_receipts:
-                fragment = new UserReceipts();
+                Intent userReceipts = new Intent(MainActivity.this, nav_userReceipts.class);
+                startActivity(userReceipts);
+                //fragment = new UserReceipts();
                 break;
             case R.id.user_coupons:
-                fragment = new UserCoupons();
+                Intent userCoupons = new Intent(MainActivity.this, nav_userCoupons.class);
+                startActivity(userCoupons);
+                //fragment = new UserCoupons();
                 break;
             case R.id.faqs:
-                fragment = new Faqs();
+                Intent faqs = new Intent(MainActivity.this, nav_faqs.class);
+                startActivity(faqs);
+                //fragment = new Faqs();
                 break;
         }
-        if(fragment != null) {
+        /*if(fragment != null) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
 
             ft.replace(R.id.content_main, fragment);
             ft.commit();
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
