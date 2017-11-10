@@ -89,7 +89,6 @@ public class nav_faqs extends AppCompatActivity
             case R.id.faqs:
                 Intent faqs = new Intent(nav_faqs.this, nav_faqs.class);
                 startActivity(faqs);
-                //fragment = new Faqs();
                 break;
             case R.id.scan_receipts:
                 Intent i = new Intent(nav_faqs.this, ScanImageActivity.class);
