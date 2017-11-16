@@ -6,19 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.storeup.ScanImageActivity">
 
-    <include
+    <!--<include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" />-->
 
     <Button
         android:id="@+id/buttonUpload"
         android:layout_width="140dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="28dp"
-        android:layout_marginLeft="108dp"
         android:layout_marginTop="8dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
@@ -26,20 +25,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutImgView"
-        app:layout_constraintVertical_bias="0.916" android:layout_marginStart="108dp">
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="135dp">
 
     </Button>
 
     <LinearLayout
         android:id="@+id/linearLayoutImgView"
-        android:layout_width="match_parent"
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="100dp"
         android:paddingTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="8dp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -62,6 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutImgView"
         app:layout_constraintVertical_bias="0.625"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        tools:layout_editor_absoluteX="301dp" />
 
 </android.support.constraint.ConstraintLayout>
