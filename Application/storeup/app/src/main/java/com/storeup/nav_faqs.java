@@ -2,9 +2,6 @@ package com.storeup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,15 +20,6 @@ public class nav_faqs extends AppCompatActivity
         setContentView(R.layout.activity_nav_faqs);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -101,7 +89,10 @@ public class nav_faqs extends AppCompatActivity
             case R.id.faqs:
                 Intent faqs = new Intent(nav_faqs.this, nav_faqs.class);
                 startActivity(faqs);
-                //fragment = new Faqs();
+                break;
+            case R.id.scan_receipts:
+                Intent i = new Intent(nav_faqs.this, ScanImageActivity.class);
+                startActivity(i);
                 break;
         }
 

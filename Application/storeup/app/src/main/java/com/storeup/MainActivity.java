@@ -42,18 +42,6 @@ public class MainActivity extends AppCompatActivity
     private static String KEY_SUCCESS = "success";
     private static String KEY_USERID  = "userid";
     String s;
-    private String userChoosenTask;
-    private int REQUEST_CAMERA = 1;
-    private int UPLOAD_FLAG = 0;
-
-    private ImageView imageView;
-
-    private Button buttonUpload;
-    private int PICK_IMAGE_REQUEST = 2;
-    private Uri filePath;
-    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-    private StorageReference uploadRef;
-    //
     TextView test;
     AppSessionManager appSessionManager;
     DrawerLayout drawer;

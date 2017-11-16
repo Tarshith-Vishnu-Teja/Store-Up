@@ -2,9 +2,6 @@ package com.storeup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,15 +20,6 @@ public class nav_userReceipts extends AppCompatActivity
         setContentView(R.layout.activity_nav_user_receipts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -84,24 +72,23 @@ public class nav_userReceipts extends AppCompatActivity
         switch (id) {
             case R.id.user_profile:
                 Intent userProfile = new Intent(nav_userReceipts.this, nav_userProfile.class);
-                //fragment = new UserProfile();
-                //getUserDetails();
                 startActivity(userProfile);
                 break;
             case R.id.user_receipts:
                 Intent userReceipts = new Intent(nav_userReceipts.this, nav_userReceipts.class);
                 startActivity(userReceipts);
-                //fragment = new UserReceipts();
                 break;
             case R.id.user_coupons:
                 Intent userCoupons = new Intent(nav_userReceipts.this, nav_userCoupons.class);
                 startActivity(userCoupons);
-                //fragment = new UserCoupons();
                 break;
             case R.id.faqs:
                 Intent faqs = new Intent(nav_userReceipts.this, nav_faqs.class);
                 startActivity(faqs);
-                //fragment = new Faqs();
+                break;
+            case R.id.scan_receipts:
+                Intent i = new Intent(nav_userReceipts.this, ScanImageActivity.class);
+                startActivity(i);
                 break;
         }
 

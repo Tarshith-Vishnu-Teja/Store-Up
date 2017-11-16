@@ -66,7 +66,7 @@ public class ScanImageActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_image);
+        setContentView(R.layout.content_scan_image);
 
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
 
