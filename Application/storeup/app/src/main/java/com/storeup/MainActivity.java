@@ -3,6 +3,7 @@ package com.storeup;
 import android.*;
 import android.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.storeup.Extras.CustomJSONObjectRequest;
 import com.storeup.Extras.VolleyController;
 
@@ -33,7 +38,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener /*, View.OnClickListener*/ {
-//    private String url = "http://10.0.2.2:3000/ocr/getImageOcr";
+    private String url = "http://10.0.2.2:3000/ocr/getImageOcr";
     private static String KEY_SUCCESS = "success";
     private static String KEY_USERID  = "userid";
     String s;
