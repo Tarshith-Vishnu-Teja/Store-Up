@@ -40,8 +40,12 @@
         <activity
             android:name=".nav_faqs"
             android:label="@string/title_activity_nav_faqs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ScanImageActivity" />
+        <activity
+            android:name=".nav_scanReceipts"
+            android:label="@string/title_activity_nav_scan_receipts"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ScanImageActivity"></activity>
     </application>
 
 </manifest>

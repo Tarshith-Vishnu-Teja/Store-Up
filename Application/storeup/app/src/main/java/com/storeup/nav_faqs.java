@@ -91,7 +91,7 @@ public class nav_faqs extends AppCompatActivity
                 startActivity(faqs);
                 break;
             case R.id.scan_receipts:
-                Intent i = new Intent(nav_faqs.this, ScanImageActivity.class);
+                Intent i = new Intent(nav_faqs.this, nav_scanReceipts.class);
                 startActivity(i);
                 break;
         }

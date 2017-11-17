@@ -92,7 +92,7 @@ public class nav_userProfile extends AppCompatActivity
                 //fragment = new Faqs();
                 break;
             case R.id.scan_receipts:
-                Intent i = new Intent(nav_userProfile.this, ScanImageActivity.class);
+                Intent i = new Intent(nav_userProfile.this, nav_scanReceipts.class);
                 startActivity(i);
                 break;
         }

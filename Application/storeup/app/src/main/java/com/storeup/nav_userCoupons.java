@@ -94,7 +94,7 @@ public class nav_userCoupons extends AppCompatActivity
                 //fragment = new Faqs();
                 break;
             case R.id.scan_receipts:
-                Intent i = new Intent(nav_userCoupons.this, ScanImageActivity.class);
+                Intent i = new Intent(nav_userCoupons.this, nav_scanReceipts.class);
                 startActivity(i);
                 break;
         }

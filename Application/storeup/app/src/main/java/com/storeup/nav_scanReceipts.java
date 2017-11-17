@@ -5,15 +5,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,8 +53,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class ScanImageActivity extends AppCompatActivity implements View.OnClickListener{
-
+public class nav_scanReceipts extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     TextView test;
     String s;
     private static String KEY_SUCCESS = "success";
@@ -85,7 +93,6 @@ public class ScanImageActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
-    @Override
     public void onClick(View view) {
         if (view == buttonUpload) {
             uploadFile();
@@ -95,7 +102,7 @@ public class ScanImageActivity extends AppCompatActivity implements View.OnClick
     private void selectImage() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
-        AlertDialog.Builder builder = new AlertDialog.Builder(ScanImageActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(nav_scanReceipts.this);
         builder.setTitle("Upload your Receipt!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -294,5 +301,39 @@ public class ScanImageActivity extends AppCompatActivity implements View.OnClick
         else {
             Toast.makeText(getApplicationContext(), "Please select a file to upload", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.user_profile:
+                Intent userProfile = new Intent(nav_scanReceipts.this, nav_userProfile.class);
+                startActivity(userProfile);
+                break;
+            case R.id.user_receipts:
+                Intent userReceipts = new Intent(nav_scanReceipts.this, nav_userReceipts.class);
+                startActivity(userReceipts);
+                break;
+            case R.id.user_coupons:
+                Intent userCoupons = new Intent(nav_scanReceipts.this, nav_userCoupons.class);
+                startActivity(userCoupons);
+                break;
+            case R.id.faqs:
+                Intent faqs = new Intent(nav_scanReceipts.this, nav_faqs.class);
+                startActivity(faqs);
+                break;
+            case R.id.scan_receipts:
+                Intent i = new Intent(nav_scanReceipts.this, nav_scanReceipts.class);
+                startActivity(i);
+                break;
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
