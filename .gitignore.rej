@@ -1,0 +1,6 @@
+diff a/.gitignore b/.gitignore	(rejected hunks)
+@@ -16,3 +16,4 @@
+ Application/storeup/app/src/main/AndroidManifest_BACKUP_6772.xml
+ Application/storeup/app/src/main/AndroidManifest_BACKUP_11500.xml
+ *.gradle
++*.properties

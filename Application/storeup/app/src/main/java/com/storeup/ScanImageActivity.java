@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 public class ScanImageActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -188,12 +189,12 @@ public class ScanImageActivity extends AppCompatActivity implements View.OnClick
             progressDialog.show();
             final String[] arr = filePath.toString().split("/");
             if(UPLOAD_FLAG == 1) {
-                uploadRef = storageReference.child("images/" + arr[arr.length - 1]);
+                uploadRef = storageReference.child("images/" + UUID.randomUUID());
                 Toast.makeText(getApplicationContext(), "Storage Uri: " + arr[arr.length - 1], Toast.LENGTH_LONG).show();
             } else if (UPLOAD_FLAG == 0) {
                 Random random = new Random();
                 int key =random.nextInt(1000);
-                uploadRef = storageReference.child("pictures/" + "pic" + key + ".jpg");
+                uploadRef = storageReference.child("images/" + UUID.randomUUID());
                 Toast.makeText(getApplicationContext(), "Storage Uri: " + "pic" + key, Toast.LENGTH_LONG).show();
             }
             uploadRef.putFile(filePath)
